@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flame/animation.dart' as animation;
-import 'package:flame/flame.dart';
-import 'package:flame/position.dart';
 import 'package:pokedex_flutter/pokemon_anim.dart';
-import 'package:pokedex_flutter/pokemon_position.dart';
 
 void main() => runApp(MyApp());
 
