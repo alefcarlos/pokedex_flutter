@@ -23,6 +23,13 @@ void main() {
     expect(position.imageY, 0.0);
   });
 
+  test("PokemonPostision.fromNumber(5)", () {
+    var position = PokemonPostision.fromNumber(5);
+
+    expect(position.imageX, 552.0);
+    expect(position.imageY, 0.0);
+  });
+
   test("PokemonPostision.fromNumber(6)", () {
     var position = PokemonPostision.fromNumber(6);
 

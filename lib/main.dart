@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flame/animation.dart' as animation;
 import 'package:flame/flame.dart';
 import 'package:flame/position.dart';
+import 'package:pokedex_flutter/pokemon_anim.dart';
 import 'package:pokedex_flutter/pokemon_position.dart';
 
 void main() => runApp(MyApp());
@@ -20,8 +21,35 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int poke;
+
+  void initState() {
+    super.initState();
+    poke = 1;
+  }
+
+  void plusPoke() {
+    setState(() {
+      poke++;
+    });
+  }
+
+  void minusPoke() {
+    setState(() {
+      var result = poke - 1;
+      if (result <= 0) result = 1;
+
+      poke = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,30 +60,32 @@ class MyHomePage extends StatelessWidget {
         title: Text('Pokédex Fire Red/Leaf Green'),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return Pokemon(number: index + 1);
-        },
-        itemCount: 151,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              RaisedButton(
+                child: Icon(
+                  Icons.navigate_before,
+                  size: 20.0,
+                ),
+                onPressed: minusPoke,
+              ),
+              RaisedButton(
+                child: Icon(
+                  Icons.navigate_next,
+                  size: 20.0,
+                ),
+                onPressed: plusPoke,
+              ),
+            ],
+          ),
+          PokemonAnimation(number: poke),
+          Text('#$poke')
+        ],
       ),
-    );
-  }
-}
-
-class Pokemon extends StatelessWidget {
-  final int number;
-  Pokemon({Key key, @required this.number}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Flame.util.animationAsWidget(
-      Position(74.0, 74.0),
-      animation.Animation.sequenced('1-generation.png', 2,
-          textureX: PokemonPostision.fromNumber(number).imageX,
-          textureY: PokemonPostision.fromNumber(number).imageY,
-          textureHeight: PokemonPostision.height,
-          textureWidth: PokemonPostision.width,
-          stepTime: 0.2),
     );
   }
 }
