@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void initState() {
     super.initState();
-    poke = 1;
+    poke = 10;
   }
 
   void plusPoke() {
