@@ -11,7 +11,7 @@ class PokemonAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flame.util.animationAsWidget(
-      Position(100.0, 100.0),
+      Position(100, 100),
       animation.Animation.sequenced('1-generation.png', 2,
           textureX: PokemonPostision.fromNumber(number).imageX,
           textureY: PokemonPostision.fromNumber(number).imageY,
